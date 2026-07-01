@@ -508,7 +508,14 @@ right:-200px;
 pointer-events:none;
 }
 @media(max-width:900px){
+.hero{padding:50px 0 40px}
 .hero-grid{grid-template-columns:1fr}
+.pricing-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.price-card{padding:18px;text-align:center}
+.price{font-size:2rem;margin:12px 0 0}
+.popular-badge{position:static;display:block;text-align:center;margin:8px 0 0;font-size:.75rem}
+.popular::before{display:none}
+.popular{border:none;box-shadow:0 0 20px rgba(0,212,255,.15)}
 .nav-links{
 position:absolute;
 top:80px;
@@ -708,7 +715,7 @@ animation-duration: 1.5s;
         <p class="section-subtitle">Простые и прозрачные тарифы без скрытых условий.</p>
         <div class="pricing-grid">
             <div class="price-card"><h3>14 дней</h3><div class="price">100 ₽</div></div>
-            <div class="price-card popular"><div class="popular-badge">Популярный</div><h3>30 дней</h3><div class="price">200 ₽</div></div>
+            <div class="price-card popular"><h3>30 дней</h3><div class="price">200 ₽</div><div class="popular-badge">Популярный</div></div>
             <div class="price-card"><h3>60 дней</h3><div class="price">380 ₽</div></div>
             <div class="price-card"><h3>90 дней</h3><div class="price">540 ₽</div></div>
             <div class="price-card"><h3>180 дней</h3><div class="price">990 ₽</div></div>
