@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zobian VPN</title>
+<title>Zobian VPN — Premium VPN</title>
 
 <link rel="icon" type="image/png" href="logo.png">
 
@@ -15,7 +15,7 @@
 --bg:#060816;
 --card:rgba(16,20,40,.72);
 --accent:#7c4dff;
---accent2:#00d4ff;
+--accent2:#b388ff;
 --text:#fff;
 --muted:#a8b0d3;
 --border:rgba(255,255,255,.08);
@@ -139,7 +139,7 @@ margin-bottom:26px;
 animation:fadeUp .9s ease forwards;
 }
 .gradient{
-background:linear-gradient(135deg,#fff,#8be9ff,#a56eff);
+background:linear-gradient(135deg,#fff,#b388ff,#a56eff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -164,7 +164,7 @@ border-radius:30px;
 padding:34px;
 backdrop-filter:blur(20px);
 box-shadow:0 20px 80px rgba(0,0,0,.45);
-animation:float 6s ease-in-out infinite;
+animation:pulseGlow 6s ease-in-out infinite;
 }
 .stats{
 display:grid;
@@ -218,7 +218,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:1.5rem;
-background:linear-gradient(135deg,rgba(124,77,255,.25),rgba(0,212,255,.2));
+background:transparent;
 margin-bottom:20px;
 }
 .price-card{
@@ -230,14 +230,14 @@ transform:translateY(-12px) scale(1.02);
 box-shadow:var(--glow);
 }
 .popular{
-border:1px solid rgba(0,212,255,.5);
+border:1px solid rgba(124,77,255,.5);
 background:linear-gradient(180deg,rgba(124,77,255,.18),rgba(255,255,255,.03));
 }
 .popular::before{
 content:'';
 position:absolute;
 inset:-40%;
-background:radial-gradient(circle,rgba(0,212,255,.18),transparent 60%);
+background:radial-gradient(circle,rgba(124,77,255,.18),transparent 60%);
 animation:spin 10s linear infinite;
 }
 .popular-badge{
@@ -264,10 +264,10 @@ border-bottom:1px solid rgba(255,255,255,.05);
 .cta-box{
 padding:70px 40px;
 text-align:center;
-border-radius:40px;
-background:linear-gradient(135deg,rgba(124,77,255,.16),rgba(0,212,255,.12));
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.08);
+border-radius:28px;
+background:rgba(255,255,255,.03);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.07);
 }
 .accordion{
 background:rgba(255,255,255,.03);
@@ -319,9 +319,9 @@ flex-wrap:wrap;
 from{opacity:0;transform:translateY(30px)}
 to{opacity:1;transform:translateY(0)}
 }
-@keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+@keyframes pulseGlow{
+0%,100%{box-shadow:0 20px 80px rgba(0,0,0,.45),0 0 40px rgba(124,77,255,.2)}
+50%{box-shadow:0 20px 100px rgba(0,0,0,.45),0 0 60px rgba(124,77,255,.35)}
 }
 @keyframes spin{
 from{transform:rotate(0)}
@@ -362,7 +362,7 @@ background:
 linear-gradient(
 135deg,
 rgba(124,77,255,.8),
-rgba(0,212,255,.55),
+rgba(124,77,255,.55),
 transparent 65%);
 -webkit-mask:
 linear-gradient(#000 0 0) content-box,
@@ -391,7 +391,7 @@ transition:.5s;
 transform:translateY(-12px) scale(1.035);
 box-shadow:
 0 10px 50px rgba(124,77,255,.28),
-0 0 120px rgba(0,212,255,.14);
+0 0 120px rgba(124,77,255,.14);
 border-color:rgba(255,255,255,.16);
 }
 
@@ -413,7 +413,7 @@ background:
 linear-gradient(
 135deg,
 rgba(124,77,255,.38),
-rgba(0,212,255,.22));
+rgba(124,77,255,.22));
 box-shadow:
 0 0 35px rgba(124,77,255,.28),
 inset 0 0 24px rgba(255,255,255,.08);
@@ -441,10 +441,10 @@ background:
 linear-gradient(
 135deg,
 #7c4dff,
-#00d4ff);
+#b388ff);
 box-shadow:
 0 0 35px rgba(124,77,255,.38),
-0 0 100px rgba(0,212,255,.18);
+0 0 100px rgba(124,77,255,.18);
 transition:.4s;
 }
 
@@ -452,7 +452,7 @@ transition:.4s;
 transform:translateY(-5px) scale(1.04);
 box-shadow:
 0 0 55px rgba(124,77,255,.55),
-0 0 140px rgba(0,212,255,.28);
+0 0 140px rgba(124,77,255,.28);
 }
 
 .telegram-btn::before{
@@ -475,38 +475,8 @@ transition:.8s;
 left:130%;
 }
 
-.cta-box{
-position:relative;
-overflow:hidden;
-}
 
-.cta-box::before{
-content:'';
-position:absolute;
-width:700px;
-height:700px;
-background:
-radial-gradient(circle,
-rgba(124,77,255,.18),
-transparent 70%);
-top:-300px;
-left:-250px;
-pointer-events:none;
-}
 
-.cta-box::after{
-content:'';
-position:absolute;
-width:600px;
-height:600px;
-background:
-radial-gradient(circle,
-rgba(0,212,255,.12),
-transparent 70%);
-bottom:-280px;
-right:-200px;
-pointer-events:none;
-}
 @media(max-width:900px){
 .hero{padding:50px 0 40px}
 .hero-grid{grid-template-columns:1fr}
@@ -515,7 +485,7 @@ pointer-events:none;
 .price{font-size:2rem;margin:12px 0 0}
 .popular-badge{position:static;display:block;text-align:center;margin:8px 0 0;font-size:.75rem}
 .popular::before{display:none}
-.popular{border:none;box-shadow:0 0 20px rgba(0,212,255,.15)}
+.popular{border:none;box-shadow:0 0 20px rgba(124,77,255,.15)}
 .nav-links{
 position:absolute;
 top:80px;
@@ -560,7 +530,7 @@ font-size:7rem;
 font-weight:800;
 line-height:1;
 
-background:linear-gradient(135deg,#8be9ff,#a56eff);
+background:linear-gradient(135deg,#b388ff,#a56eff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 
@@ -702,10 +672,10 @@ animation-duration: 1.5s;
         <h2 class="section-title">Преимущества сервиса</h2>
         <p class="section-subtitle">Современный VPN для приватности, скорости и стабильной работы.</p>
         <div class="features-grid">
-            <div class="feature-card"><div class="feature-icon">🛡️</div><h3>Конфиденциальность</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Шифрование трафика и защита ваших данных в сети.</p></div>
-            <div class="feature-card"><div class="feature-icon">⚡</div><h3>Высокая скорость</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Быстрые серверы до 10 Гбит/с для стриминга, игр и работы.</p></div>
-            <div class="feature-card"><div class="feature-icon">🌍</div><h3>Мировая сеть</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Подключение к разным странам с минимальной задержкой.</p></div>
-            <div class="feature-card"><div class="feature-icon">📱</div><h3>Поддержка всех устройств</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Windows, macOS, Android, iPhone, роутеры и Smart TV.</p></div>
+            <div class="feature-card"><div class="feature-icon"><img src="shield.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Конфиденциальность</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Шифрование трафика и защита ваших данных в сети.</p></div>
+            <div class="feature-card"><div class="feature-icon"><img src="speed.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Высокая скорость</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Быстрые серверы до 10 Гбит/с для стриминга, игр и работы.</p></div>
+            <div class="feature-card"><div class="feature-icon"><img src="planet.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Мировая сеть</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Подключение к разным странам с минимальной задержкой.</p></div>
+            <div class="feature-card"><div class="feature-icon"><img src="pc.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Поддержка всех устройств</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Windows, macOS, Android, iPhone, роутеры и Smart TV.</p></div>
         </div>
     </div>
 </section>
