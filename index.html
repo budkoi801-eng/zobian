@@ -1,945 +1,262 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zobian VPN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zobian VPN</title>
 
-<link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
---bg:#060816;
---card:rgba(16,20,40,.72);
---accent:#7c4dff;
---accent2:#b388ff;
---text:#fff;
---muted:#a8b0d3;
---border:rgba(255,255,255,.08);
---glow:0 0 40px rgba(124,77,255,.45);
-}
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-body{
-font-family:'Manrope',sans-serif;
-background:var(--bg);
-color:var(--text);
-overflow-x:hidden;
-}
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:
-linear-gradient(rgba(6,8,22,.86),rgba(6,8,22,.92)),
-url('https://static.tildacdn.com/tild3466-6138-4539-a432-623631313037/80534_1.jpg') center/cover no-repeat;
-z-index:-2;
-}
-.noise{
-position:fixed;
-inset:0;
-pointer-events:none;
-opacity:.03;
-background-image:url('https://grainy-gradients.vercel.app/noise.svg');
-z-index:999;
-}
-.container{
-width:min(1180px,calc(100% - 40px));
-margin:0 auto;
-}
-header{
-position:sticky;
-top:0;
-z-index:100;
-backdrop-filter:blur(20px);
-background:rgba(6,8,22,.45);
-border-bottom:1px solid rgba(255,255,255,.05);
-}
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 0;
-}
-.logo{
-display:flex;
-align-items:center;
-gap:14px;
-font-size:1.2rem;
-font-weight:800;
-}
-.logo-box{
-width:48px;
-height:48px;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-}
-.nav-links{
-display:flex;
-gap:28px;
-align-items:center;
-}
-.nav-links a{
-color:var(--muted);
-text-decoration:none;
-font-weight:600;
-transition:.25s;
-}
-.nav-links a:hover{color:#fff}
-.burger{
-display:none;
-font-size:1.8rem;
-cursor:pointer;
-}
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:14px 26px;
-border-radius:16px;
-font-weight:700;
-text-decoration:none;
-transition:.3s;
-}
-.btn-primary{
-background:linear-gradient(135deg,var(--accent),var(--accent2));
-color:#fff;
-box-shadow:var(--glow);
-}
-.btn-primary:hover{
-transform:translateY(-3px) scale(1.03);
-}
-.hero{
-padding:120px 0 100px;
-}
-.hero-grid{
-display:grid;
-grid-template-columns:1.2fr 1fr;
-gap:60px;
-align-items:center;
-}
-.badge{
-display:inline-flex;
-padding:10px 18px;
-border-radius:999px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-margin-bottom:24px;
-color:var(--muted);
-animation:fadeUp .8s ease forwards;
-}
-h1{
-font-size:clamp(3rem,6vw,6rem);
-line-height:.95;
-margin-bottom:26px;
-animation:fadeUp .9s ease forwards;
-}
-.gradient{
-background:linear-gradient(135deg,#fff,#b388ff,#a56eff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-.hero p{
-font-size:1.15rem;
-line-height:1.8;
-color:var(--muted);
-margin-bottom:34px;
-max-width:640px;
-animation:fadeUp 1s ease forwards;
-}
-.hero-actions{
-display:flex;
-gap:16px;
-flex-wrap:wrap;
-animation:fadeUp 1.1s ease forwards;
-}
-.glass-card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:30px;
-padding:34px;
-backdrop-filter:blur(20px);
-box-shadow:0 20px 80px rgba(0,0,0,.45);
-animation:pulseGlow 6s ease-in-out infinite;
-}
-.stats{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px;
-margin-top:24px;
-}
-.stat{
-padding:20px;
-border-radius:20px;
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.05);
-}
-.section{
-padding:100px 0;
-}
-.section-title{
-font-size:clamp(2rem,4vw,3.4rem);
-text-align:center;
-margin-bottom:16px;
-}
-.section-subtitle{
-text-align:center;
-max-width:760px;
-margin:0 auto 56px;
-line-height:1.8;
-color:var(--muted);
-}
-.features-grid,.pricing-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:22px;
-}
-.feature-card,.price-card,.support-card{
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.07);
-border-radius:28px;
-padding:30px;
-backdrop-filter:blur(16px);
-transition:.35s;
-}
-.feature-card:hover,.support-card:hover{
-transform:translateY(-8px);
-box-shadow:var(--glow);
-}
-.feature-icon{
-width:60px;
-height:60px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:1.5rem;
-background:transparent;
-margin-bottom:20px;
-}
-.price-card{
-position:relative;
-overflow:hidden;
-}
-.price-card:hover{
-transform:translateY(-12px) scale(1.02);
-box-shadow:var(--glow);
-}
-.popular{
-border:1px solid rgba(124,77,255,.5);
-background:linear-gradient(180deg,rgba(124,77,255,.18),rgba(255,255,255,.03));
-}
-.popular::before{
-content:'';
-position:absolute;
-inset:-40%;
-background:radial-gradient(circle,rgba(124,77,255,.18),transparent 60%);
-animation:spin 10s linear infinite;
-}
-.popular-badge{
-position:absolute;
-top:18px;
-right:18px;
-padding:8px 14px;
-border-radius:999px;
-background:linear-gradient(135deg,var(--accent),var(--accent2));
-font-size:.8rem;
-font-weight:700;
-}
-.price{
-font-size:3rem;
-font-weight:800;
-margin:16px 0 22px;
-}
-.price-card ul{list-style:none;margin-bottom:26px}
-.price-card li{
-padding:10px 0;
-color:var(--muted);
-border-bottom:1px solid rgba(255,255,255,.05);
-}
-.cta-box{
-padding:70px 40px;
-text-align:center;
-border-radius:28px;
-background:rgba(255,255,255,.03);
-backdrop-filter:blur(16px);
-border:1px solid rgba(255,255,255,.07);
-}
-.accordion{
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.08);
-border-radius:24px;
-padding:24px;
-margin-bottom:18px;
-backdrop-filter:blur(14px);
-}
-.accordion summary{
-cursor:pointer;
-font-size:1.15rem;
-font-weight:700;
-}
-.accordion-content{
-margin-top:20px;
-line-height:1.8;
-color:var(--muted);
-}
-.support-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:22px;
-}
-.support-card{
-text-decoration:none;
-text-align:center;
-}
-footer{
-padding:50px 0;
-border-top:1px solid rgba(255,255,255,.06);
-color:var(--muted);
-}
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:30px;
-  flex-wrap:wrap;
-}
-.footer-links{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
-.footer-links a{color:var(--muted);text-decoration:none}
-.footer-links a:hover{color:#fff}
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
-}
-@keyframes pulseGlow{
-0%,100%{box-shadow:0 20px 80px rgba(0,0,0,.45),0 0 40px rgba(124,77,255,.2)}
-50%{box-shadow:0 20px 100px rgba(0,0,0,.45),0 0 60px rgba(124,77,255,.35)}
-}
-@keyframes spin{
-from{transform:rotate(0)}
-to{transform:rotate(360deg)}
-}
-/* TRUST BLOCK */
-
-.trust-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:24px;
-margin:42px auto 42px;
-max-width:900px;
-}
-
-.trust-card{
-position:relative;
-overflow:hidden;
-padding:30px 24px;
-border-radius:30px;
-background:
-linear-gradient(180deg,
-rgba(255,255,255,.08),
-rgba(255,255,255,.03));
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(18px);
-transition:.45s cubic-bezier(.2,.8,.2,1);
-isolation:isolate;
-}
-
-.trust-card::before{
-content:'';
-position:absolute;
-inset:-1px;
-border-radius:30px;
-padding:1px;
-background:
-linear-gradient(
-135deg,
-rgba(124,77,255,.8),
-rgba(124,77,255,.55),
-transparent 65%);
--webkit-mask:
-linear-gradient(#000 0 0) content-box,
-linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-opacity:.8;
-}
-
-.trust-card::after{
-content:'';
-position:absolute;
-width:240px;
-height:240px;
-background:
-radial-gradient(circle,
-rgba(124,77,255,.22),
-transparent 70%);
-top:-100px;
-right:-100px;
-z-index:-1;
-transition:.5s;
-}
-
-.trust-card:hover{
-transform:translateY(-12px) scale(1.035);
-box-shadow:
-0 10px 50px rgba(124,77,255,.28),
-0 0 120px rgba(124,77,255,.14);
-border-color:rgba(255,255,255,.16);
-}
-
-.trust-card:hover::after{
-transform:scale(1.25);
-opacity:1;
-}
-
-.trust-icon{
-width:78px;
-height:78px;
-margin-bottom:22px;
-border-radius:24px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:2.1rem;
-background:
-linear-gradient(
-135deg,
-rgba(124,77,255,.38),
-rgba(124,77,255,.22));
-box-shadow:
-0 0 35px rgba(124,77,255,.28),
-inset 0 0 24px rgba(255,255,255,.08);
-}
-
-.trust-title{
-font-size:1.08rem;
-font-weight:800;
-margin-bottom:10px;
-}
-
-.trust-text{
-color:var(--muted);
-line-height:1.7;
-font-size:.95rem;
-}
-
-.telegram-btn{
-position:relative;
-overflow:hidden;
-padding:18px 40px;
-font-size:1.08rem;
-border-radius:22px;
-background:
-linear-gradient(
-135deg,
-#7c4dff,
-#b388ff);
-box-shadow:
-0 0 35px rgba(124,77,255,.38),
-0 0 100px rgba(124,77,255,.18);
-transition:.4s;
-}
-
-.telegram-btn:hover{
-transform:translateY(-5px) scale(1.04);
-box-shadow:
-0 0 55px rgba(124,77,255,.55),
-0 0 140px rgba(124,77,255,.28);
-}
-
-.telegram-btn::before{
-content:'';
-position:absolute;
-top:0;
-left:-130%;
-width:100%;
-height:100%;
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.28),
-transparent);
-transition:.8s;
-}
-
-.telegram-btn:hover::before{
-left:130%;
-}
-
-
-
-@media(max-width:900px){
-.hero{padding:50px 0 40px}
-.hero-grid{grid-template-columns:1fr}
-.pricing-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-.price-card{padding:18px;text-align:center}
-.price{font-size:2rem;margin:12px 0 0}
-.popular-badge{position:static;display:block;text-align:center;margin:8px 0 0;font-size:.75rem}
-.popular::before{display:none}
-.popular{border:none;box-shadow:0 0 20px rgba(124,77,255,.15)}
-.nav-links{
-position:absolute;
-top:80px;
-right:20px;
-background:rgba(10,12,28,.95);
-border:1px solid rgba(255,255,255,.08);
-border-radius:20px;
-padding:20px;
-flex-direction:column;
-display:none;
-}
-.nav-links.active{display:flex}
-.burger{display:block}
-}
-@keyframes pulseInfinity{
-0%,100%{
-transform:scale(1);
-filter:drop-shadow(0 0 0 rgba(124,77,255,.2));
-}
-50%{
-transform:scale(1.08);
-filter:drop-shadow(0 0 18px rgba(124,77,255,.55));
-}
-}
-.infinity-stat{
-position:relative;
-overflow:hidden;
-}
-
-.infinity-stat h3{
-position:relative;
-z-index:2;
-font-size:3rem;
-}
-
-.infinity-bg{
-position:absolute;
-top:-22px;
-right:-8px;
-
-font-size:7rem;
-font-weight:800;
-line-height:1;
-
-background:linear-gradient(135deg,#b388ff,#a56eff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-opacity:.16;
-
-pointer-events:none;
-
-animation:infinityFloat 1.8s ease-in-out infinite;
-}
-
-@keyframes infinityFloat{
-0%,100%{
-transform:translateY(0px) scale(1);
-opacity:.14;
-}
-
-50%{
-transform:translateY(-6px) scale(1.06);
-opacity:.24;
-}
-}
-.stat.mini {
-display:flex;
-align-items:center;
-gap:12px;
-padding:16px;
-border-radius:16px;
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.06);
-transition:.3s;
-}
-
-.stat.mini:hover {
-transform:translateY(-4px);
-border-color:rgba(255,255,255,.14);
-}
-
-.stat .icon {
-font-size:1.3rem;
-opacity:.9;
-filter:grayscale(1) brightness(2);
-}
-
-.stat .value {
-font-size:1.1rem;
-font-weight:700;
-color:#fff;
-}
-
-.stat .label {
-font-size:.85rem;
-color:var(--muted);
-}
-.icon {
-display: inline-block;
-animation: rotateSoft 4s ease-in-out infinite;
-transform-origin: center;
-}
-
-@keyframes rotateSoft {
-0%   { transform: rotate(-10deg); }
-50%  { transform: rotate(10deg); }
-100% { transform: rotate(-10deg); }
-}
-
-.stat.mini:hover .icon {
-animation-duration: 1.5s;
-}
-.trust-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.trust-icon {
-    margin: 0 auto 22px;
-}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="noise"></div>
-<header>
-<div class="container nav">
-<div class="logo">
-<div class="logo-box">
-<img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
-</div>
-<span>Zobian VPN</span>
-</div>
-<div class="nav-links" id="navLinks">
-<a href="#features">Преимущества</a>
-<a href="#pricing">Тарифы</a>
-<a href="#docs">Документы</a>
-<a href="#contact">Контакты</a>
-</div>
-<div class="burger" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</div>
-</div>
-</header>
-<section class="hero">
-<div class="container hero-grid">
-<div>
-<div class="badge">🔒 Безопасное и стабильное VPN-подключение</div>
-<h1>Безопасный интернет <br><span class="gradient">для скорости и приватности</span></h1>
-<p>Zobian VPN — быстрый, стабильный и удобный VPN на каждый день.</p>
-<div class="hero-actions">
-<a href="#pricing" class="btn btn-primary">Тарифы</a>
-<a href="#docs" class="btn" style="border:1px solid rgba(255,255,255,.1);color:#fff;">Юридическая информация</a>
-</div>
-</div>
-<div class="glass-card">
-<h2 style="font-size:2rem;margin-bottom:16px;">Почему выбирают Zobian VPN</h2>
-<p style="color:var(--muted);line-height:1.8;">Стабильная инфраструктура, высокая скорость и современная защита без компромиссов.</p>
-<div class="stats">
-<div class="stat mini">
-  <div class="icon rocket-icon">🚀</div>
-  <div>
-    <div class="value">99.9%</div>
-    <div class="label">Стабильная сеть</div>
-  </div>
-</div>
-<div class="stat"><h3>24/7</h3><span>Серверы онлайн</span></div>
-<div class="stat"><h3>AES-256</h3><span>Современное шифрование</span></div>
-<div class="stat infinity-stat">
-
-<div class="infinity-bg">
-∞
-</div>
-
-<h3>∞</h3>
-<span>Безлимитный трафик</span>
-
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="section" id="features">
-    <div class="container">
-        <h2 class="section-title">Преимущества сервиса</h2>
-        <p class="section-subtitle">Современный VPN для приватности, скорости и стабильной работы.</p>
-        <div class="features-grid">
-            <div class="feature-card"><div class="feature-icon"><img src="shield.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Конфиденциальность</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Шифрование трафика и защита ваших данных в сети.</p></div>
-            <div class="feature-card"><div class="feature-icon"><img src="speed.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Высокая скорость</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Быстрые серверы до 10 Гбит/с для стриминга, игр и работы.</p></div>
-            <div class="feature-card"><div class="feature-icon"><img src="planet.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Мировая сеть</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Подключение к разным странам с минимальной задержкой.</p></div>
-            <div class="feature-card"><div class="feature-icon"><img src="pc.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Поддержка всех устройств</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Windows, macOS, Android, iPhone, роутеры и Smart TV.</p></div>
+  <div class="noise"></div>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-box">
+          <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
         </div>
+        <span>Zobian VPN</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#features">Преимущества</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#docs">Документы</a>
+        <a href="#contact">Контакты</a>
+        <a href="https://miniapp.zobian.pro/" class="btn-cabinet">Личный кабинет</a>
+      </div>
+      <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</div>
     </div>
-</section>
-<section class="section" id="pricing">
-    <div class="container">
-        <h2 class="section-title">Тарифы</h2>
-        <p class="section-subtitle">Простые и прозрачные тарифы без скрытых условий.</p>
-        <div class="pricing-grid">
-            <div class="price-card"><h3>14 дней</h3><div class="price">150 ₽</div></div>
-            <div class="price-card popular"><h3>30 дней</h3><div class="price">250 ₽</div><div class="popular-badge">Популярный</div></div>
-            <div class="price-card"><h3>60 дней</h3><div class="price">400 ₽</div></div>
-            <div class="price-card"><h3>90 дней</h3><div class="price">550 ₽</div></div>
-            <div class="price-card"><h3>180 дней</h3><div class="price">1000 ₽</div></div>
-            <div class="price-card"><h3>360 дней</h3><div class="price">1900 ₽</div></div>
+  </header>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">🔒 Безопасное и стабильное VPN-подключение</div>
+        <h1>Безопасный интернет <br><span class="gradient">для скорости и приватности</span></h1>
+        <p>Zobian VPN — быстрый, стабильный и удобный VPN на каждый день.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">Тарифы</a>
+          <a href="https://miniapp.zobian.pro/" class="btn" style="border:1px solid rgba(124,77,255,.3);color:#fff;background:rgba(124,77,255,.05);">Личный кабинет</a>
         </div>
+      </div>
+      <div class="glass-card">
+        <h2 style="font-size:2rem;margin-bottom:16px;">Почему выбирают Zobian VPN</h2>
+        <p style="color:var(--muted);line-height:1.8;">Стабильная инфраструктура, высокая скорость и современная защита без компромиссов.</p>
+        <div class="stats">
+          <div class="stat mini">
+            <div class="icon rocket-icon">🚀</div>
+            <div>
+              <div class="value">99.9%</div>
+              <div class="label">Стабильная сеть</div>
+            </div>
+          </div>
+          <div class="stat"><h3>24/7</h3><span>Серверы онлайн</span></div>
+          <div class="stat"><h3>AES-256</h3><span>Современное шифрование</span></div>
+          <div class="stat infinity-stat">
+            <div class="infinity-bg">∞</div>
+            <h3>∞</h3>
+            <span>Безлимитный трафик</span>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
-<section class="section">
-<div class="container">
-<div class="cta-box">
-
-<h2 class="section-title" style="margin-bottom:20px;">
-Готов к быстрому и безопасному интернету?
-</h2>
-
-<p class="section-subtitle" style="margin-bottom:20px;">
-Подключай Zobian VPN и получай стабильный VPN-сервис с современным уровнем защиты.
-</p>
-
-<div class="trust-grid">
-
-<div class="trust-card">
-<img src="timer.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
-<div class="trust-title">
-Подключение за 1 минуту
-</div>
-
-<div class="trust-text">
-Быстрый запуск VPN без сложной настройки и лишних действий.
-</div>
-</div>
-
-<div class="trust-card">
-<img src="send.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
-<div class="trust-title">
-Автоматическая выдача доступа
-</div>
-
-<div class="trust-text">
-Telegram-бот моментально отправит доступ и инструкцию после оплаты.
-</div>
-</div>
-
-<div class="trust-card">
-<img src="tp.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
-<div class="trust-title">
-Поддержка 24/7
-</div>
-
-<div class="trust-text">
-Поможем с подключением, настройкой и любыми вопросами.
-</div>
-</div>
-
-</div>
-
-<a href="https://t.me/Zobian_VPN_bot"
-target="_blank"
-class="btn telegram-btn">
-Подключить через Telegram
-</a>
-
-<p style="
-margin-top:18px;
-font-size:.95rem;
-color:var(--muted);
-line-height:1.7;
-">
-Оплата и выдача доступа происходят через Telegram-бота.
-</p>
-</div>
-</div>
-</section>
-<section class="section" id="docs">
-<div class="container">
-<h2 class="section-title">Документы</h2>
-<p class="section-subtitle">Юридическая информация сервиса.</p>
-
-<details class="accordion">
-<summary>Политика конфиденциальности</summary>
-<div class="accordion-content">
-
-<p><strong style="color:#fff;">1. Общие положения</strong></p>
-
-<p>1.1. Настоящая Политика конфиденциальности (далее — «Политика») регулирует порядок обработки и защиты информации, которую Пользователь передаёт при использовании сервиса (далее — «Сервис»).</p>
-
-<p>1.2. Используя Сервис, Пользователь подтверждает своё согласие с условиями Политики. Если Пользователь не согласен с условиями — он обязан прекратить использование Сервиса.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">2. Сбор информации</strong></p>
-
-<p>2.1. Сервис может собирать следующие типы данных: идентификаторы аккаунта (логин, ID, никнейм и т.п.); техническую информацию (IP-адрес, данные о браузере, устройстве и операционной системе); историю взаимодействий с Сервисом.</p>
-
-<p>2.2. Сервис не требует от Пользователя предоставления паспортных данных, документов, фотографий или другой личной информации, кроме минимально необходимой для работы.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">3. Использование информации</strong></p>
-
-<p>3.1. Сервис может использовать полученную информацию исключительно для: обеспечения работы функционала; связи с Пользователем (в том числе для уведомлений и поддержки); анализа и улучшения работы Сервиса.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">4. Передача информации третьим лицам</strong></p>
-
-<p>4.1. Администрация не передаёт полученные данные третьим лицам, за исключением случаев: если это требуется по закону; если это необходимо для исполнения обязательств перед Пользователем (например, при работе с платёжными системами); если Пользователь сам дал на это согласие.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">5. Хранение и защита данных</strong></p>
-
-<p>5.1. Данные хранятся в течение срока, необходимого для достижения целей обработки.</p>
-
-<p>5.2. Администрация принимает разумные меры для защиты данных, но не гарантирует абсолютную безопасность информации при передаче через интернет.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">6. Отказ от ответственности</strong></p>
-
-<p>6.1. Пользователь понимает и соглашается, что передача информации через интернет всегда сопряжена с рисками.</p>
-
-<p>6.2. Администрация не несёт ответственности за утрату, кражу или раскрытие данных, если это произошло по вине третьих лиц или самого Пользователя.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">7. Изменения в Политике</strong></p>
-
-<p>7.1. Администрация вправе изменять условия Политики без предварительного уведомления.</p>
-
-<p>7.2. Продолжение использования Сервиса после внесения изменений означает согласие Пользователя с новой редакцией Политики.</p>
-
-</div>
-</details>
-
-<details class="accordion">
-<summary>Пользовательское соглашение</summary>
-
-<div class="accordion-content">
-
-<p><strong style="color:#fff;">1. Общие положения</strong></p>
-
-<p>1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует порядок использования онлайн-сервиса (далее — «Сервис»), предоставляемого Администрацией.</p>
-
-<p>1.2. Используя Сервис, включая запуск бота, регистрацию, оплату услуг или получение доступа к материалам, Пользователь подтверждает, что полностью ознакомился с условиями настоящего Соглашения и принимает их в полном объёме.</p>
-
-<p>1.3. В случае несогласия с условиями Соглашения Пользователь обязан прекратить использование Сервиса.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">2. Характер услуг и цифровых товаров</strong></p>
-
-<p>2.1. Сервис предоставляет цифровые товары и услуги нематериального характера, включая, но не ограничиваясь: информационные материалы, обучающие программы, консультации, цифровые продукты и сервисные услуги.</p>
-
-<p>2.2. Пользователь осознаёт и соглашается, что ценность цифровых товаров и услуг Сервиса заключается в систематизации, анализе, форме подачи, сопровождении, поддержке и обновлениях.</p>
-
-<p>2.3. Сервис не заявляет и не гарантирует уникальность, исключительность или недоступность отдельных элементов материалов вне Сервиса.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">3. Отказ от гарантий и ответственности</strong></p>
-
-<p>3.1. Сервис предоставляется на условиях «AS IS» («как есть»).</p>
-
-<p>3.2. Администрация не гарантирует: соответствие Сервиса ожиданиям Пользователя; достижение каких-либо финансовых, коммерческих, профессиональных или иных результатов; бесперебойную и безошибочную работу Сервиса.</p>
-
-<p>3.3. Администрация не несёт ответственности за любые прямые или косвенные убытки, включая упущенную выгоду; последствия применения Пользователем полученных материалов; действия или бездействие третьих лиц; временные технические сбои и ограничения доступа.</p>
-
-<p>3.4. Все решения о применении материалов, рекомендаций и услуг принимаются Пользователем самостоятельно и на его риск.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">4. Законность использования</strong></p>
-
-<p>4.1. Сервис не предназначен для поощрения, организации или содействия противоправной деятельности.</p>
-
-<p>4.2. Пользователь обязуется использовать Сервис исключительно в рамках применимого законодательства и правил третьих сторон.</p>
-
-<p>4.3. Ответственность за законность использования материалов и услуг Сервиса полностью возлагается на Пользователя.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">5. Интеллектуальная собственность</strong></p>
-
-<p>5.1. Все материалы, размещённые в Сервисе, охраняются законодательством об интеллектуальной собственности.</p>
-
-<p>5.2. Пользователю запрещается копировать, распространять, перепродавать, передавать третьим лицам или иным образом использовать материалы Сервиса без разрешения правообладателя.</p>
-
-<p>5.3. Нарушение прав интеллектуальной собственности может повлечь ограничение доступа к Сервису без компенсации.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">6. Ограничение доступа</strong></p>
-
-<p>6.1. Администрация вправе приостановить или ограничить доступ Пользователя к Сервису в случае: нарушения условий настоящего Соглашения; выявления злоупотреблений; требований законодательства или платёжных провайдеров.</p>
-
-<p>6.2. Ограничение доступа не освобождает Пользователя от обязательств, возникших ранее.</p>
-
-<p>6.3. Администрация оставляет за собой право отказывать в обслуживании Пользователям, чьи действия могут создавать повышенные риски для Сервиса, платёжных провайдеров или третьих лиц.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">7. Платежи и возвраты</strong></p>
-
-<p>7.1. Оплата услуг и цифровых товаров производится на условиях, указанных в Сервисе до момента оплаты.</p>
-
-<p>7.2. В связи с нематериальным характером цифровых товаров и услуг, возврат денежных средств после предоставления доступа не осуществляется, за исключением случаев, указанных ниже.</p>
-
-<p>7.3. Возврат средств возможен только если: услуга не была оказана по технической вине Сервиса; доступ к цифровому товару фактически не был предоставлен.</p>
-
-<p>7.4. Для рассмотрения вопроса о возврате Пользователь обязан обратиться в службу поддержки в течение 24 часов с момента оплаты.</p>
-
-<p>7.5. Решение о возврате принимается Администрацией индивидуально.</p>
-
-<p>7.6. Пользователь подтверждает, что обязуется не инициировать возврат платежа (chargeback) через платёжные системы без предварительного обращения в службу поддержки Сервиса.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">8. Конфиденциальность</strong></p>
-
-<p>8.1. Администрация может собирать минимально необходимые технические данные для обеспечения работы Сервиса.</p>
-
-<p>8.2. Администрация принимает разумные меры для защиты данных, однако не гарантирует абсолютную безопасность передаваемой информации.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">9. Изменение условий</strong></p>
-
-<p>9.1. Администрация вправе вносить изменения в настоящее Соглашение.</p>
-
-<p>9.2. Актуальная версия Соглашения публикуется в Сервисе.</p>
-
-<p>9.3. Продолжение использования Сервиса означает согласие Пользователя с обновлёнными условиями.</p>
-
-<p style="margin-top:16px;"><strong style="color:#fff;">10. Контактная информация</strong></p>
-
-<p>10.1. По всем вопросам Пользователь может обратиться в службу поддержки по электронной почте: robertharveyrlic@outlook.com</p>
-
-<p style="margin-top:20px;color:var(--muted);font-style:italic;">
-Используя Сервис (в том числе запуская бота и/или вводя команду /start), Пользователь подтверждает, что ознакомлен с настоящим Соглашением и принимает его условия в полном объёме.
-</p>
-
-</div>
-</details>
-
-</div>
-</section>
-<section class="section" id="contact" style="padding-top:0;">
-<div class="container">
-<h2 class="section-title">Поддержка</h2>
-<p class="section-subtitle">Свяжитесь с нами удобным способом.</p>
-<div class="support-grid">
-<a href="mailto:robertharveyrlic@outlook.com" class="support-card">
-<div style="font-size:2rem;margin-bottom:12px;">✉️</div>
-<h3>Email</h3>
-<p style="margin-top:10px;color:var(--muted);">robertharveyrlic@outlook.com</p>
-</a>
-<a href="https://t.me/Zobian_VPN_bot" target="_blank" class="support-card">
-<div style="font-size:2rem;margin-bottom:12px;">🤖</div>
-<h3>Telegram-бот</h3>
-<p style="margin-top:10px;color:var(--muted);">@Zobian_VPN_bot</p>
-</a>
-</div>
-</div>
-</section>
-<footer>
-<div class="container footer-grid">
-<div>
-<div class="logo" style="margin-bottom:0;">
-<div class="logo-box">
-<img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
-</div>
-<span>Zobian VPN</span>
-</div>
-</div>
-<div class="footer-links">
-<a href="#features">Преимущества</a>
-<a href="#pricing">Тарифы</a>
-<a href="#docs">Документы</a>
-<a href="https://t.me/maineex" target="_blank">Поддержка</a>
-</div>
-</div>
-</footer>
+  </section>
+  <section class="section" id="features">
+    <div class="container">
+      <h2 class="section-title">Преимущества сервиса</h2>
+      <p class="section-subtitle">Современный VPN для приватности, скорости и стабильной работы.</p>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon"><img src="shield.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Конфиденциальность</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Шифрование трафика и защита ваших данных в сети.</p></div>
+        <div class="feature-card"><div class="feature-icon"><img src="speed.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Высокая скорость</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Быстрые серверы до 10 Гбит/с для стриминга, игр и работы.</p></div>
+        <div class="feature-card"><div class="feature-icon"><img src="planet.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Мировая сеть</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Подключение к разным странам с минимальной задержкой.</p></div>
+        <div class="feature-card"><div class="feature-icon"><img src="pc.png" alt="" style="width:32px;height:32px;filter:brightness(0) invert(1);"></div><h3>Поддержка всех устройств</h3><p style="color:var(--muted);margin-top:12px;line-height:1.7;">Windows, macOS, Android, iPhone, роутеры и Smart TV.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="pricing">
+    <div class="container">
+      <h2 class="section-title">Тарифы</h2>
+      <p class="section-subtitle">Простые и прозрачные тарифы без скрытых условий.</p>
+      <div class="pricing-grid">
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card">
+          <h3>14 дней</h3>
+          <div class="price">150 ₽</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card popular">
+          <h3>30 дней</h3>
+          <div class="price">250 ₽</div>
+          <div class="popular-badge">Популярный</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card">
+          <h3>60 дней</h3>
+          <div class="price">400 ₽</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card">
+          <h3>90 дней</h3>
+          <div class="price">550 ₽</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card">
+          <h3>180 дней</h3>
+          <div class="price">1000 ₽</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+        <a href="https://miniapp.zobian.pro/subscription/purchase" class="price-card">
+          <h3>360 дней</h3>
+          <div class="price">1900 ₽</div>
+          <div class="btn-select">Выбрать</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="section-title" style="margin-bottom:20px;">Готов к быстрому и безопасному интернету?</h2>
+        <p class="section-subtitle" style="margin-bottom:20px;">Подключай Zobian VPN и получай стабильный VPN-сервис с современным уровнем защиты.</p>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <img src="timer.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
+            <div class="trust-title">Подключение за 1 минуту</div>
+            <div class="trust-text">Быстрый запуск VPN без сложной настройки и лишних действий.</div>
+          </div>
+          <div class="trust-card">
+            <img src="send.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
+            <div class="trust-title">Автоматическая выдача доступа</div>
+            <div class="trust-text">Telegram-бот моментально отправит доступ и инструкцию после оплаты.</div>
+          </div>
+          <div class="trust-card">
+            <img src="tp.png" alt="" style="width:36px;height:36px;margin-bottom:16px;filter:brightness(0) invert(1);">
+            <div class="trust-title">Поддержка 24/7</div>
+            <div class="trust-text">Поможем с подключением, настройкой и любыми вопросами.</div>
+          </div>
+        </div>
+        <a href="https://t.me/Zobian_VPN_bot" target="_blank" class="btn telegram-btn">Подключить через Telegram</a>
+        <p style="margin-top:18px;font-size:.95rem;color:var(--muted);line-height:1.7;">Оплата и выдача доступа происходят через Telegram-бота.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="docs">
+    <div class="container">
+      <h2 class="section-title">Документы</h2>
+      <p class="section-subtitle">Юридическая информация сервиса.</p>
+
+      <details class="accordion">
+        <summary>Политика конфиденциальности</summary>
+        <div class="accordion-content">
+          <p><strong style="color:#fff;">1. Общие положения</strong></p>
+          <p>1.1. Настоящая Политика конфиденциальности (далее — «Политика») регулирует порядок обработки и защиты информации, которую Пользователь передаёт при использовании сервиса (далее — «Сервис»).</p>
+          <p>1.2. Используя Сервис, Пользователь подтверждает своё согласие с условиями Политики. Если Пользователь не согласен с условиями — он обязан прекратить использование Сервиса.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">2. Сбор информации</strong></p>
+          <p>2.1. Сервис может собирать следующие типы данных: идентификаторы аккаунта (логин, ID, никнейм и т.п.); техническую информацию (IP-адрес, данные о браузере, устройстве и операционной системе); историю взаимодействий с Сервисом.</p>
+          <p>2.2. Сервис не требует от Пользователя предоставления паспортных данных, документов, фотографий или другой личной информации, кроме минимально необходимой для работы.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">3. Использование информации</strong></p>
+          <p>3.1. Сервис может использовать полученную информацию исключительно для: обеспечения работы функционала; связи с Пользователем (в том числе для уведомлений и поддержки); анализа и улучшения работы Сервиса.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">4. Передача информации третьим лицам</strong></p>
+          <p>4.1. Администрация не передаёт полученные данные третьим лицам, за исключением случаев: если это требуется по закону; если это необходимо для исполнения обязательств перед Пользователем (например, при работе с платёжными системами); если Пользователь сам дал на это согласие.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">5. Хранение и защита данных</strong></p>
+          <p>5.1. Данные хранятся в течение срока, необходимого для достижения целей обработки.</p>
+          <p>5.2. Администрация принимает разумные меры для защиты данных, но не гарантирует абсолютную безопасность информации при передаче через интернет.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">6. Отказ от ответственности</strong></p>
+          <p>6.1. Пользователь понимает и соглашается, что передача информации через интернет всегда сопряжена с рисками.</p>
+          <p>6.2. Администрация не несёт ответственности за утрату, кражу или раскрытие данных, если это произошло по вине третьих лиц или самого Пользователя.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">7. Изменения в Политике</strong></p>
+          <p>7.1. Администрация вправе изменять условия Политики без предварительного уведомления.</p>
+          <p>7.2. Продолжение использования Сервиса после внесения изменений означает согласие Пользователя с новой редакцией Политики.</p>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>Пользовательское соглашение</summary>
+        <div class="accordion-content">
+          <p><strong style="color:#fff;">1. Общие положения</strong></p>
+          <p>1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует порядок использования онлайн-сервиса (далее — «Сервис»), предоставляемого Администрацией.</p>
+          <p>1.2. Используя Сервис, включая запуск бота, регистрацию, оплату услуг или получение доступа к материалам, Пользователь подтверждает, что полностью ознакомился с условиями настоящего Соглашения и принимает их в полном объёме.</p>
+          <p>1.3. В случае несогласия с условиями Соглашения Пользователь обязан прекратить использование Сервиса.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">2. Характер услуг и цифровых товаров</strong></p>
+          <p>2.1. Сервис предоставляет цифровые товары и услуги нематериального характера, включая, но не ограничиваясь: информационные материалы, обучающие программы, консультации, цифровые продукты и сервисные услуги.</p>
+          <p>2.2. Пользователь осознаёт и соглашается, что ценность цифровых товаров и услуг Сервиса заключается в систематизации, анализе, форме подачи, сопровождении, поддержке и обновлениях.</p>
+          <p>2.3. Сервис не заявляет и не гарантирует уникальность, исключительность или недоступность отдельных элементов материалов вне Сервиса.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">3. Отказ от гарантий и ответственности</strong></p>
+          <p>3.1. Сервис предоставляется на условиях «AS IS» («как есть»).</p>
+          <p>3.2. Администрация не гарантирует: соответствие Сервиса ожиданиям Пользователя; достижение каких-либо финансовых, коммерческих, профессиональных или иных результатов; бесперебойную и безошибочную работу Сервиса.</p>
+          <p>3.3. Администрация не несёт ответственности за любые прямые или косвенные убытки, включая упущенную выгоду; последствия применения Пользователем полученных материалов; действия или бездействие третьих лиц; временные технические сбои и ограничения доступа.</p>
+          <p>3.4. Все решения о применении материалов, рекомендаций и услуг принимаются Пользователем самостоятельно и на его риск.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">4. Законность использования</strong></p>
+          <p>4.1. Сервис не предназначен для поощрения, организации или содействия противоправной деятельности.</p>
+          <p>4.2. Пользователь обязуется использовать Сервис исключительно в рамках применимого законодательства и правил третьих сторон.</p>
+          <p>4.3. Ответственность за законность использования материалов и услуг Сервиса полностью возлагается на Пользователя.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">5. Интеллектуальная собственность</strong></p>
+          <p>5.1. Все материалы, размещённые в Сервисе, охраняются законодательством об интеллектуальной собственности.</p>
+          <p>5.2. Пользователю запрещается копировать, распространять, перепродавать, передавать третьим лицам или иным образом использовать материалы Сервиса без разрешения правообладателя.</p>
+          <p>5.3. Нарушение прав интеллектуальной собственности может повлечь ограничение доступа к Сервису без компенсации.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">6. Ограничение доступа</strong></p>
+          <p>6.1. Администрация вправе приостановить или ограничить доступ Пользователя к Сервису в случае: нарушения условий настоящего Соглашения; выявления злоупотреблений; требований законодательства или платёжных провайдеров.</p>
+          <p>6.2. Ограничение доступа не освобождает Пользователя от обязательств, возникших ранее.</p>
+          <p>6.3. Администрация оставляет за собой право отказывать в обслуживании Пользователям, чьи действия могут создавать повышенные риски для Сервиса, платёжных провайдеров или третьих лиц.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">7. Платежи и возвраты</strong></p>
+          <p>7.1. Оплата услуг и цифровых товаров производится на условиях, указанных в Сервисе до момента оплаты.</p>
+          <p>7.2. В связи с нематериальным характером цифровых товаров и услуг, возврат денежных средств после предоставления доступа не осуществляется, за исключением случаев, указанных ниже.</p>
+          <p>7.3. Возврат средств возможен только если: услуга не была оказана по технической вине Сервиса; доступ к цифровому товару фактически не был предоставлен.</p>
+          <p>7.4. Для рассмотрения вопроса о возврате Пользователь обязан обратиться в службу поддержки в течение 24 часов с момента оплаты.</p>
+          <p>7.5. Решение о возврате принимается Администрацией индивидуально.</p>
+          <p>7.6. Пользователь подтверждает, что обязуется не инициировать возврат платежа (chargeback) через платёжные системы без предварительного обращения в службу поддержки Сервиса.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">8. Конфиденциальность</strong></p>
+          <p>8.1. Администрация может собирать минимально необходимые технические данные для обеспечения работы Сервиса.</p>
+          <p>8.2. Администрация принимает разумные меры для защиты данных, однако не гарантирует абсолютную безопасность передаваемой информации.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">9. Изменение условий</strong></p>
+          <p>9.1. Администрация вправе вносить изменения в настоящее Соглашение.</p>
+          <p>9.2. Актуальная версия Соглашения публикуется в Сервисе.</p>
+          <p>9.3. Продолжение использования Сервиса означает согласие Пользователя с обновлёнными условиями.</p>
+          <p style="margin-top:16px;"><strong style="color:#fff;">10. Контактная информация</strong></p>
+          <p>10.1. По всем вопросам Пользователь может обратиться в службу поддержки по электронной почте: robertharveyrlic@outlook.com</p>
+          <p style="margin-top:20px;color:var(--muted);font-style:italic;">Используя Сервис (в том числе запуская бота и/или вводя команду /start), Пользователь подтверждает, что ознакомлен с настоящим Соглашением и принимает его условия в полном объёме.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+  <section class="section" id="contact" style="padding-top:0;">
+    <div class="container">
+      <h2 class="section-title">Поддержка</h2>
+      <p class="section-subtitle">Свяжитесь с нами удобным способом.</p>
+      <div class="support-grid">
+        <a href="mailto:robertharveyrlic@outlook.com" class="support-card">
+          <div style="font-size:2rem;margin-bottom:12px;">✉️</div>
+          <h3>Email</h3>
+          <p style="margin-top:10px;color:var(--muted);">robertharveyrlic@outlook.com</p>
+        </a>
+        <a href="https://t.me/Zobian_VPN_bot" target="_blank" class="support-card">
+          <div style="font-size:2rem;margin-bottom:12px;">🤖</div>
+          <h3>Telegram-бот</h3>
+          <p style="margin-top:10px;color:var(--muted);">@Zobian_VPN_bot</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:0;">
+          <div class="logo-box">
+            <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+          </div>
+          <span>Zobian VPN</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Преимущества</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#docs">Документы</a>
+        <a href="https://t.me/maineex" target="_blank">Поддержка</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
