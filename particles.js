@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gColor = 77;
   const bColor = 255;
 
-  // Detect mobile device
+  // Detect mobile device (screen width less than 768px)
   const isMobile = window.innerWidth < 768;
 
   // Optimize values for mobile screens to prevent clutter and save battery
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.random() * (max - min) + min;
   }
 
+  // Get particle count based on screen area
   function getParticleCount() {
     const baseCount = Math.round((width * height) / 16000);
     if (isMobile) {
@@ -87,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (p.y < 0) { p.y = 0; p.vy *= -1; }
       else if (p.y > height) { p.y = height; p.vy *= -1; }
 
-      // Mouse repulsion physics (only if active)
-      if (mouse.active) {
+      // Mouse repulsion physics (only if active and not mobile)
+      if (mouse.active && !isMobile) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -126,8 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Connect particle to user cursor (only if active)
-      if (mouse.active) {
+      // Connect particle to user cursor (only if active and not mobile)
+      if (mouse.active && !isMobile) {
         const p = particles[i];
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
@@ -157,9 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
     mouse.active = false;
   }
 
-  // Deactivate touch interaction during scroll on mobile to avoid chaotic speed jumps
   function handleTouchMove(e) {
-    if (e.touches[0] && !isMobile) {
+    if (e.touches[0]) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
       mouse.active = true;
@@ -174,11 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
   animationFrameId = requestAnimationFrame(animate);
 
   window.addEventListener("resize", resizeCanvas);
-  window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("mouseout", handleMouseOut);
   
-  // Only listen to touch events on desktop touchscreens, bypass on mobile to keep scrolling smooth
+  // Bind interaction events ONLY for PC / Desktop screens
   if (!isMobile) {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseOut);
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("touchend", handleTouchEnd);
   }
