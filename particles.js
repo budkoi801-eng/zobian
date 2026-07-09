@@ -13,8 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const gColor = 77;
   const bColor = 255;
 
-  const maxConnectionsDistance = 140;
-  const mouseRepelDistance = 190;
+  // Detect mobile device
+  const isMobile = window.innerWidth < 768;
+
+  // Optimize values for mobile screens to prevent clutter and save battery
+  const maxConnectionsDistance = isMobile ? 90 : 140;
+  const mouseRepelDistance = isMobile ? 80 : 190;
   
   // Support retina displays with proper resolution scaling
   const dpr = window.devicePixelRatio || 1;
@@ -24,19 +28,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getParticleCount() {
-    return Math.max(40, Math.min(150, Math.round((width * height) / 14000)));
+    const baseCount = Math.round((width * height) / 16000);
+    if (isMobile) {
+      // 15-30 particles is perfect for mobile screens to avoid lag and visual mess
+      return Math.max(15, Math.min(30, baseCount));
+    }
+    return Math.max(40, Math.min(150, baseCount));
   }
 
   function initParticles() {
     particles = [];
     const count = getParticleCount();
+    // Slow down particles on mobile for a calmer, less aggressive background
+    const speedLimit = isMobile ? 0.2 : 0.4;
+
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: randomRange(-0.4, 0.4),
-        vy: randomRange(-0.4, 0.4),
-        r: randomRange(1, 2.6)
+        vx: randomRange(-speedLimit, speedLimit),
+        vy: randomRange(-speedLimit, speedLimit),
+        r: randomRange(1, 2.3)
       });
     }
   }
@@ -75,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (p.y < 0) { p.y = 0; p.vy *= -1; }
       else if (p.y > height) { p.y = height; p.vy *= -1; }
 
-      // Mouse repulsion physics
+      // Mouse repulsion physics (only if active)
       if (mouse.active) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
@@ -114,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Connect particle to user cursor
+      // Connect particle to user cursor (only if active)
       if (mouse.active) {
         const p = particles[i];
         const dx = p.x - mouse.x;
@@ -145,8 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
     mouse.active = false;
   }
 
+  // Deactivate touch interaction during scroll on mobile to avoid chaotic speed jumps
   function handleTouchMove(e) {
-    if (e.touches[0]) {
+    if (e.touches[0] && !isMobile) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
       mouse.active = true;
@@ -163,6 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resizeCanvas);
   window.addEventListener("mousemove", handleMouseMove);
   window.addEventListener("mouseout", handleMouseOut);
-  window.addEventListener("touchmove", handleTouchMove, { passive: true });
-  window.addEventListener("touchend", handleTouchEnd);
+  
+  // Only listen to touch events on desktop touchscreens, bypass on mobile to keep scrolling smooth
+  if (!isMobile) {
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
+  }
 });
