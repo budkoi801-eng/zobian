@@ -16,6 +16,13 @@
   scroll-behavior: smooth;
 }
 
+#features,
+#pricing,
+#docs,
+#contact {
+  scroll-margin-top: 100px; /* Offset scroll target position so headers are not covered by sticky menu */
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   background: var(--bg);
