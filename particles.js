@@ -195,22 +195,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Floating CTA visibility based on scroll position (hides when reaching support section)
+  // Floating CTA visibility based on scroll position (hides when reaching cta section or support section)
   const floatingCTA = document.getElementById("floatingCTA");
-  const contactSection = document.getElementById("contact");
+  const ctaBox = document.getElementById("ctaBox");
   if (floatingCTA) {
     window.addEventListener("scroll", () => {
       const scrollPos = window.scrollY;
       const isPastHero = scrollPos > 450;
       
       let isNearFooter = false;
-      if (contactSection) {
-        const rect = contactSection.getBoundingClientRect();
-        // Hide button when the top of the support block is visible in the viewport
+      if (ctaBox) {
+        const rect = ctaBox.getBoundingClientRect();
+        // Hide button when the top of the cta-box block is visible in the viewport
         isNearFooter = rect.top < window.innerHeight - 50;
       } else {
-        // Fallback: check if we are within 400px of page bottom
-        isNearFooter = (window.innerHeight + scrollPos) >= (document.documentElement.scrollHeight - 400);
+        // Fallback: check if we are within 500px of page bottom
+        isNearFooter = (window.innerHeight + scrollPos) >= (document.documentElement.scrollHeight - 500);
       }
       
       if (isPastHero && !isNearFooter) {
