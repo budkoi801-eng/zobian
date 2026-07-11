@@ -18,6 +18,7 @@
 
 #features,
 #pricing,
+#servers,
 #docs,
 #contact {
   scroll-margin-top: 100px; /* Offset scroll target position so headers are not covered by sticky menu */
@@ -101,6 +102,11 @@ header {
 
 .nav-links a:hover {
   color: #fff;
+}
+
+.nav-links a.active {
+  color: #fff !important;
+  font-weight: 700 !important;
 }
 
 .burger {
@@ -1102,5 +1108,130 @@ header {
 @media (max-width: 900px) {
   .floating-cta {
     display: block; /* Show only on mobile screens */
+  }
+}
+
+/* 7. Servers block styling */
+.servers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.server-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.server-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(124, 77, 255, 0.4);
+  box-shadow: 0 10px 40px rgba(124, 77, 255, 0.15);
+}
+
+.server-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+}
+
+.server-flag {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.server-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.server-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.info-label {
+  color: var(--muted);
+}
+
+.info-value {
+  color: #fff;
+  font-weight: 600;
+}
+
+.info-value.ping-low {
+  color: #00ff88;
+}
+
+.server-load-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.load-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7c4dff, #b388ff);
+  transition: width 1s ease-in-out;
+}
+
+.server-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #00ff88;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
   }
 }
