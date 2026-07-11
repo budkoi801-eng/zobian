@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zobian VPN</title>
 
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="logo.webp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
     <div class="container nav">
       <div class="logo">
         <div class="logo-box">
-          <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+          <img src="logo.webp" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
         </div>
         <span>Zobian VPN</span>
       </div>
@@ -30,7 +30,11 @@
         <a href="#contact">Контакты</a>
         <a href="https://miniapp.zobian.pro/" class="btn-cabinet">Личный кабинет</a>
       </div>
-      <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</div>
+      <button class="burger" id="burgerBtn" onclick="document.getElementById('navLinks').classList.toggle('active'); this.classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
   <section class="hero">
@@ -139,7 +143,10 @@
             <div class="trust-text">Поможем с подключением, настройкой и любыми вопросами.</div>
           </div>
         </div>
-        <a href="https://t.me/Zobian_VPN_bot" target="_blank" class="btn telegram-btn">Подключить через Telegram</a>
+        <div class="cta-buttons">
+          <a href="https://t.me/Zobian_VPN_bot" target="_blank" class="btn telegram-btn">Подключить через Telegram</a>
+          <a href="https://miniapp.zobian.pro/" target="_blank" class="btn cta-cabinet-btn">Войти в Личный кабинет</a>
+        </div>
         <p style="margin-top:18px;font-size:.95rem;color:var(--muted);line-height:1.7;">Личный кабинет, оплата и настройки доступны прямо внутри Telegram-бота и на сайте.</p>
       </div>
     </div>
@@ -246,7 +253,7 @@
       <div>
         <div class="logo" style="margin-bottom:0;">
           <div class="logo-box">
-            <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+            <img src="logo.webp" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
           </div>
           <span>Zobian VPN</span>
         </div>
@@ -259,6 +266,7 @@
       </div>
     </div>
   </footer>
+  <a href="#pricing" class="floating-cta" id="floatingCTA">Оформить Zobian VPN</a>
   <script src="particles.js"></script>
 </body>
 </html>
