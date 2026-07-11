@@ -182,4 +182,42 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("touchend", handleTouchEnd);
   }
+
+  // Mobile menu click helper to auto-close nav links when clicked
+  const burger = document.getElementById("burgerBtn");
+  const navLinks = document.getElementById("navLinks");
+  if (burger && navLinks) {
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        burger.classList.remove("active");
+        navLinks.classList.remove("active");
+      });
+    });
+  }
+
+  // Floating CTA visibility based on scroll position (hides when reaching support section)
+  const floatingCTA = document.getElementById("floatingCTA");
+  const contactSection = document.getElementById("contact");
+  if (floatingCTA) {
+    window.addEventListener("scroll", () => {
+      const scrollPos = window.scrollY;
+      const isPastHero = scrollPos > 450;
+      
+      let isNearFooter = false;
+      if (contactSection) {
+        const rect = contactSection.getBoundingClientRect();
+        // Hide button when the top of the support block is visible in the viewport
+        isNearFooter = rect.top < window.innerHeight - 50;
+      } else {
+        // Fallback: check if we are within 400px of page bottom
+        isNearFooter = (window.innerHeight + scrollPos) >= (document.documentElement.scrollHeight - 400);
+      }
+      
+      if (isPastHero && !isNearFooter) {
+        floatingCTA.classList.add("visible");
+      } else {
+        floatingCTA.classList.remove("visible");
+      }
+    });
+  }
 });
