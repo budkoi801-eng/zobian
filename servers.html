@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Серверы — Zobian VPN</title>
+
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Page specific tweaks for standalone servers view */
+    .servers-hero {
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+    .coming-soon-text {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      animation: pulseText 3s infinite ease-in-out;
+    }
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.95; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div class="noise"></div>
+  <header>
+    <div class="container nav">
+      <div class="logo" onclick="window.location.href='index.html';" style="cursor:pointer;">
+        <div class="logo-box">
+          <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+        </div>
+        <span>Zobian VPN</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html#features">Преимущества</a>
+        <a href="index.html#pricing">Тарифы</a>
+        <a href="index.html#docs">Документы</a>
+        <a href="index.html#contact">Контакты</a>
+        <a href="servers.html" class="active">Серверы</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://miniapp.zobian.pro/" class="btn-cabinet">Личный кабинет</a>
+      </div>
+      <button class="burger" id="burgerBtn" onclick="document.getElementById('navLinks').classList.toggle('active'); this.classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="servers-hero">
+    <div class="container">
+      <h1 class="section-title">География серверов Zobian VPN</h1>
+      <p class="section-subtitle">Высокоскоростные локации с пропускной способностью 10 Гбит/с, минимальным пингом и защитой от сетевых угроз.</p>
+      
+      <div class="servers-grid">
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇵🇱</span>
+            <span class="server-name">Польша</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~65 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇩🇪</span>
+            <span class="server-name">Германия</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~38 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇸🇪</span>
+            <span class="server-name">Швеция</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~23 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇫🇮</span>
+            <span class="server-name">Финляндия</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~34 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇳🇱</span>
+            <span class="server-name">Нидерланды</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~42 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+
+        <div class="server-card">
+          <div class="server-header">
+            <span class="server-flag">🇷🇺</span>
+            <span class="server-name">Россия</span>
+          </div>
+          <div class="server-info">
+            <div class="info-row">
+              <span class="info-label">Пропускная способность:</span>
+              <span class="info-value">10 Гбит/с</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Задержка (Ping):</span>
+              <span class="info-value ping-low">~4-27 мс</span>
+            </div>
+          </div>
+          <div class="server-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Работает отлично</span>
+          </div>
+        </div>
+      </div>
+      <div class="coming-soon-text">
+        🌐 Новые локации уже скоро!
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-box">
+            <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+          </div>
+          <span>Zobian VPN</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html#features">Преимущества</a>
+        <a href="index.html#pricing">Тарифы</a>
+        <a href="index.html#docs">Документы</a>
+        <a href="servers.html">Серверы</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://t.me/maineex" target="_blank">Поддержка</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://miniapp.zobian.pro/subscription/purchase" class="floating-cta" id="floatingCTA">Оформить Zobian VPN</a>
+  <script src="particles.js?v=1.1"></script>
+</body>
+</html>
