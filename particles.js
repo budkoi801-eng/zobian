@@ -220,4 +220,52 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // ScrollSpy logic to highlight active section/page in navbar
+  const sections = document.querySelectorAll("section[id]");
+  const navAnchorLinks = document.querySelectorAll(".nav-links a[href^='#'], .nav-links a[href^='index.html#']");
+  const navPagesLinks = document.querySelectorAll(".nav-links a[href$='.html']");
+  
+  // First, check if we are on a subpage like servers.html or faq.html
+  const currentPath = window.location.pathname;
+  let onSubpage = false;
+  navPagesLinks.forEach(link => {
+    const href = link.getAttribute("href");
+    if (currentPath.includes(href)) {
+      link.classList.add("active");
+      onSubpage = true;
+    }
+  });
+
+  if (!onSubpage && navAnchorLinks.length > 0) {
+    const updateActiveLink = () => {
+      let currentSectionId = "";
+      const scrollPos = window.scrollY + 120; // offset for sticky header
+      
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentSectionId = section.getAttribute("id");
+        }
+      });
+      
+      navAnchorLinks.forEach(link => {
+        link.classList.remove("active");
+        const href = link.getAttribute("href");
+        if (href === `#${currentSectionId}` || href === `index.html#${currentSectionId}`) {
+          link.classList.add("active");
+        }
+      });
+    };
+
+    // Run immediately on page load
+    updateActiveLink();
+
+    // Run on scroll
+    window.addEventListener("scroll", updateActiveLink);
+    
+    // Run on full page load to catch late browser scroll jumps
+    window.addEventListener("load", updateActiveLink);
+  }
 });
