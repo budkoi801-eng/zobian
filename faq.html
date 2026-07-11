@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ и Инструкции — Zobian VPN</title>
+
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .faq-hero {
+      padding: 100px 0 40px;
+      text-align: center;
+    }
+    
+    /* Onboarding steps styles */
+    .steps-section {
+      padding: 40px 0;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 24px;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(124, 77, 255, 0.3);
+    }
+    .step-num {
+      position: absolute;
+      top: -15px;
+      left: 24px;
+      background: linear-gradient(135deg, #7c4dff, #b388ff);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(124, 77, 255, 0.4);
+    }
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      margin-top: 10px;
+    }
+    .step-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .platform-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .platform-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .platform-btn:hover {
+      background: rgba(124, 77, 255, 0.1);
+      border-color: rgba(124, 77, 255, 0.4);
+    }
+    
+    /* FAQ Sectionspecific styles */
+    .faq-accordion-section {
+      padding: 60px 0 100px;
+    }
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div class="noise"></div>
+  <header>
+    <div class="container nav">
+      <div class="logo" onclick="window.location.href='index.html';" style="cursor:pointer;">
+        <div class="logo-box">
+          <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+        </div>
+        <span>Zobian VPN</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html#features">Преимущества</a>
+        <a href="index.html#pricing">Тарифы</a>
+        <a href="index.html#docs">Документы</a>
+        <a href="index.html#contact">Контакты</a>
+        <a href="servers.html">Серверы</a>
+        <a href="faq.html" class="active">FAQ</a>
+        <a href="https://miniapp.zobian.pro/" class="btn-cabinet">Личный кабинет</a>
+      </div>
+      <button class="burger" id="burgerBtn" onclick="document.getElementById('navLinks').classList.toggle('active'); this.classList.toggle('active');">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="faq-hero">
+      <div class="container">
+        <h1 class="section-title">База знаний и FAQ</h1>
+        <p class="section-subtitle">Простые пошаговые инструкции по настройке и ответы на все технические вопросы.</p>
+      </div>
+    </section>
+
+    <!-- Installation & Getting Started Section -->
+    <section class="steps-section">
+      <div class="container">
+        <h2 class="section-title">Как начать пользоваться за 3 шага</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-title">Установите приложение</div>
+            <div class="step-text">
+              Выберите вашу операционную систему (iOS, Android, Windows, macOS, Linux, Apple TV) в Личном кабинете или боте и установите рекомендуемый клиент в один клик (например, <strong>Happ</strong>, <strong>FIClashX</strong>, <strong>Koala Clash</strong> или <strong>Prizrak-Box</strong>).
+            </div>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-title">Оформите подписку</div>
+            <div class="step-text">
+              Выберите подходящий тариф и оплатите подписку через наш удобный <a href="https://miniapp.zobian.pro/" style="color:var(--accent);text-decoration:none;font-weight:700;">Личный кабинет</a> или через <a href="https://t.me/Zobian_VPN_bot" style="color:var(--accent);text-decoration:none;font-weight:700;" target="_blank">Telegram-бот</a>.
+            </div>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-title">Добавьте в 1 нажатие</div>
+            <div class="step-text">
+              После оплаты откройте выданную подписку и просто нажмите кнопку <strong>«Добавить подписку»</strong>. Наша система автоматически откроет приложение, настроит профиль и активирует подключение!
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center; color:var(--muted); font-size:0.9rem; margin-top:32px; opacity:0.85; line-height:1.6;">
+          💡 <strong>Если подписка не добавилась автоматически:</strong> вы можете скопировать прямую ссылку на подписку вручную (поле со ссылкой находится в разделе «Подписка» прямо под кнопкой «Подключить устройство») и импортировать её в приложение из буфера обмена.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-accordion-section">
+      <div class="container faq-container">
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        
+        <details class="accordion">
+          <summary>Будет ли работать на iPhone и Android?</summary>
+          <div class="accordion-content">
+            <p>Да, абсолютно на всех устройствах! Наш VPN совместим с мобильными телефонами и планшетами на iOS (iPhone, iPad) и Android, домашними компьютерами и ноутбуками на Windows, macOS и Linux, а также со Smart TV и роутерами. Вы можете использовать одну подписку на нескольких устройствах одновременно.</p>
+          </div>
+        </details>
+
+        <details class="accordion">
+          <summary>Что делать, если VPN заблокируют?</summary>
+          <div class="accordion-content">
+            <p>Zobian VPN спроектирован так, чтобы противостоять любым блокировкам. Мы работаем на современном протоколе <strong>VLESS Reality</strong>, который маскирует VPN-трафик под посещение обычных крупных сайтов (таких как Apple, Yahoo или Microsoft). Провайдеры видят это как обычный безопасный серфинг и не могут его заблокировать. В случае возникновения любых точечных блокировок наша команда мгновенно и незаметно перенастроит серверы — вам ничего переустанавливать не придется.</p>
+          </div>
+        </details>
+
+        <details class="accordion">
+          <summary>Какая скорость соединения?</summary>
+          <div class="accordion-content">
+            <p>Мы не ограничиваем скорость пользователей. Все наши серверы подключены к скоростным сетевым каналам на скорости до <strong>10 Гбит/с</strong>. Реальная скорость зависит от возможностей вашего интернет-провайдера и удаленности от серверов, но в среднем показатели составляют от 150 до 600 Мбит/с. Этого более чем достаточно для мгновенной загрузки сайтов, онлайн-игр с низким пингом и плавного просмотра видео в 4K Ultra HD без единой задержки.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-box">
+            <img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerHTML='ZB';">
+          </div>
+          <span>Zobian VPN</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html#features">Преимущества</a>
+        <a href="index.html#pricing">Тарифы</a>
+        <a href="index.html#docs">Документы</a>
+        <a href="servers.html">Серверы</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://t.me/maineex" target="_blank">Поддержка</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://miniapp.zobian.pro/subscription/purchase" class="floating-cta" id="floatingCTA">Оформить Zobian VPN</a>
+  <script src="particles.js?v=1.1"></script>
+</body>
+</html>
