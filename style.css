@@ -28,7 +28,7 @@ body::before {
   position: fixed;
   inset: 0;
   background: linear-gradient(rgba(6, 8, 22, .86), rgba(6, 8, 22, .92)),
-    url('bg.webp') center/cover no-repeat;
+    url('https://static.tildacdn.com/tild3466-6138-4539-a432-623631313037/80534_1.jpg') center/cover no-repeat;
   z-index: -2;
 }
 
